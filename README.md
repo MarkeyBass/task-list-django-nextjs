@@ -12,17 +12,18 @@ When creating new task, it won't be added to the change list. The created task w
 
 ## Run app on windows & Linux
 
+* Before starting, please ensure you have Python 3.8 (or above), pip, venv, nodejs and npm installed on your system.
+
 ### Server Setup
 
-1. Before starting, please ensure you have Python 3.8 (or above), pip, venv, nodejs and npm installed on your system.
 
-2. From the root of the project, navigate to the "server" directory:
+1. From the root of the project, navigate to the "server" directory:
 
 ```bash 
 cd server 
 ```
 
-3. Create a new virtual environment:
+2. Create a new virtual environment:
 
   Windows:
 
@@ -36,7 +37,7 @@ python -m venv venv
 python3 -m venv venv 
 ```
 
-4. Activate the virtual environment:
+3. Activate the virtual environment:
    
   Windows:
   
@@ -50,13 +51,13 @@ Linux:
 source venv/bin/activate 
 ```
 
-5. Install the required dependencies:
+4. Install the required dependencies:
   
 ```bash
 pip install -r requirements.txt
 ```
 
-6. Start backend: 
+5. Start backend: 
   
 ```bash
 python manage.py runserver 
@@ -66,19 +67,19 @@ python manage.py runserver
 
 ### Client Setup
 
-7. From the root of the project, navigate to the "client" directory:
+6. From the root of the project, navigate to the "client" directory:
    
 ```bash
 cd client
 ```
 
-8. Install the required dependencies:
+7. Install the required dependencies:
 
 ```bash
 npm install
 ```
 
-9. Run the client app:
+8. Run the client app:
    
 ```bash
 npm run dev
