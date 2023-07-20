@@ -40,25 +40,25 @@ python3 -m venv venv
    
   Windows:
   
-bash``` 
+```bash 
 source venv/Scripts/activate
 ```
 
 Linux:
 
-bash```
+```bash
 source venv/bin/activate 
 ```
 
 5. Install the required dependencies:
   
-bash```
+```bash
 pip install -r requirements.txt
 ```
 
 6. Start backend: 
   
-bash```
+```bash
 python manage.py runserver 
 ```
   
@@ -68,21 +68,20 @@ python manage.py runserver
 
 7. From the root of the project, navigate to the "client" directory:
    
-bash```
+```bash
 cd client
 ```
 
 8. Install the required dependencies:
 
-bash```
+```bash
 npm install
 ```
 
 9. Run the client app:
    
-bash```
+```bash
 npm run dev
 ```
-
 
 The client app will be available at http://localhost:3000
