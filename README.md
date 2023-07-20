@@ -19,36 +19,48 @@ When creating new task, it won't be added to the change list. The created task w
 2. From the root of the project, navigate to the "server" directory:
 
 ```bash 
-  cd server 
+cd server 
 ```
 
 3. Create a new virtual environment:
 
   Windows:
-  
-    ``` python -m venv venv ```
+
+```bash   
+python -m venv venv 
+```
 
   Linux:
 
-    ``` python3 -m venv venv ``` 
+```bash 
+python3 -m venv venv 
+```
 
 4. Activate the virtual environment:
    
   Windows:
   
-    ``` source venv/Scripts/activate ```
+bash``` 
+source venv/Scripts/activate
+```
 
-  Linux:
+Linux:
 
-    ` source venv/bin/activate `
+bash```
+source venv/bin/activate 
+```
 
 5. Install the required dependencies:
   
-    ` pip install -r requirements.txt `
+bash```
+pip install -r requirements.txt
+```
 
 6. Start backend: 
   
-    ``` python manage.py runserver ```
+bash```
+python manage.py runserver 
+```
   
   The server will be available at http://localhost:8000
 
@@ -56,15 +68,21 @@ When creating new task, it won't be added to the change list. The created task w
 
 7. From the root of the project, navigate to the "client" directory:
    
-    ```cd client```
+bash```
+cd client
+```
 
 8. Install the required dependencies:
 
-    ```npm install```
+bash```
+npm install
+```
 
 9. Run the client app:
    
-    ```npm run dev```
+bash```
+npm run dev
+```
 
 
 The client app will be available at http://localhost:3000
