@@ -38,7 +38,7 @@ When creating new task, it won't be added to the change list. The created task w
   
   The server will be available at http://localhost:8000
 
-## Client Setup
+### Client Setup
 
 7. From the root of the project, navigate to the "client" directory:
    
