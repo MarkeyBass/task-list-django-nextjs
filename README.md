@@ -18,7 +18,7 @@ When creating new task, it won't be added to the change list. The created task w
 
 2. From the root of the project, navigate to the "server" directory:
 
-   ```cd server```
+    ```cd server```
 
 3. Create a new virtual environment:
   
@@ -26,11 +26,11 @@ When creating new task, it won't be added to the change list. The created task w
 
 4. Activate the virtual environment:
   
-   ``` source venv/Scripts/activate ```
+    ``` source venv/Scripts/activate ```
 
 5. Install the required dependencies:
   
-  ``` pip install -r requirements.txt ```
+    ``` pip install -r requirements.txt ```
   
 
 6. Start backend: 
@@ -43,7 +43,7 @@ When creating new task, it won't be added to the change list. The created task w
 
 7. From the root of the project, navigate to the "client" directory:
    
-   ```cd client```
+    ```cd client```
 
 8. Install the required dependencies:
 
@@ -51,7 +51,7 @@ When creating new task, it won't be added to the change list. The created task w
 
 9. Run the client app:
    
-   ```npm run dev```
+    ```npm run dev```
 
 
 The client app will be available at http://localhost:3000
