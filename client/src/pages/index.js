@@ -19,12 +19,12 @@ const HomePage = () => {
   const [tasks, setTasks] = useState([]);
   const [localTasks, setLocalTasks] = useState([]); // [{title, description, is_done, order }]
   const [localyDeletedTaskIds, setLocalyDeletedTaskIds] = useState([]);
+  // const [newlyAddedTasks, setNewlyAddedTasks] = useState([]);
   const [hasChanges, setHasChanges] = useState(false);
   const [orderHaveChanged, setOrderHaveChanged] = useState(false);
   const [changes, setChanges] = useState({});
   const [currentEditTask, setCurrentEditTask] = useState(null); // {} or null
 
-  console.log("CHANGES", changes);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -46,7 +46,8 @@ const HomePage = () => {
     const addedTask = await addTask(newTask);
     if (addedTask) {
       setLocalTasks((prevTasks) => [...prevTasks, addedTask]);
-      setHasChanges(true);
+      // setHasChanges(true);
+      // setNewlyAddedTasks((prevTasks) => [...prevTasks, addedTask])
     }
   };
 
@@ -70,19 +71,18 @@ const HomePage = () => {
     // Save local changes to the backend
     try {
       console.log({ localTasks, tasks });
-      if (localyDeletedTaskIds) {
+      if (localyDeletedTaskIds.length > 0) {
         await Promise.all(localyDeletedTaskIds.map((id) => deleteTask(id)));
       }
       if (hasChanges || orderHaveChanged) {
         await Promise.all(localTasks.map((task) => updateTask(task.id, task)));
       }
-
-      setTasks(localTasks);
+      
       setChanges([]);
       setHasChanges(false);
       setOrderHaveChanged(false);
-
       setTasks(localTasks);
+    
     } catch (error) {
       console.error("Error saving changes:", error);
     }
@@ -95,6 +95,7 @@ const HomePage = () => {
     setOrderHaveChanged(false);
   };
 
+  // Local Update
   const handleTaskUpdate = (taskId, updatedFields) => {
     const updatedTasks = localTasks.map((task) =>
       task.id === taskId ? { ...task, ...updatedFields } : task

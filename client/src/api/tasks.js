@@ -41,6 +41,7 @@ export const deleteTask = async (taskId) => {
     return response.data;
   } catch (error) {
     console.error('Error deleting task:', error);
+    console.error('Error Description:', error.message);
     return null;
   }
 };

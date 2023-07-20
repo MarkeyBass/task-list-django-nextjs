@@ -26,7 +26,8 @@ function EditTaskModal({
   onUpdateTask,
 }) {
   const handleClose = () => setCurrentEditTask(null);
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     onUpdateTask(currentEditTask.id, {
       ...currentEditTask,
       title,
@@ -79,7 +80,6 @@ function EditTaskModal({
                 type="submit"
                 variant="contained"
                 color="primary"
-                // onClick={handleSubmit}
               >
                 Save Locally
               </Button>
