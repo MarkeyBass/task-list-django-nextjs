@@ -10,23 +10,35 @@ Note that this feature is still under development and will be improved in future
 When creating new task, it won't be added to the change list. The created task will be stored in the db first. 
 
 
-## Run app on windows
+## Run app on windows & Linux
 
 ### Server Setup
 
-1. Before starting, please ensure you have Python 3, pip, nodejs and npm installed on your system.
+1. Before starting, please ensure you have Python 3.8 (or above), pip, venv, nodejs and npm installed on your system.
 
 2. From the root of the project, navigate to the "server" directory:
 
     ```cd server```
 
 3. Create a new virtual environment:
+
+  Windows:
   
-    ```python -m venv venv``` 
+    ```python -m venv venv```
+
+  Linux:
+
+    ```python3 -m venv venv``` 
 
 4. Activate the virtual environment:
+   
+  Windows:
   
     ```source venv/Scripts/activate```
+
+  Linux:
+
+    ```source venv/bin/activate```
 
 5. Install the required dependencies:
   
