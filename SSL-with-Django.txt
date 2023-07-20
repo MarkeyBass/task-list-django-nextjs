@@ -1,0 +1,295 @@
+https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04
+###############################################
+How To Install Nginx on Ubuntu 20.04
+---------------------------------------
+1) Follow the order of commands 
+2) Skip te command blocks starting with ❗
+3) Change `mark-k.com` to your domain name.
+
+LET GODS LOVE BE WITH YOU!!!
+
+###############################################
+
+sudo apt update
+sudo apt install nginx
+
+
+❗ skip for aws
+---------------
+sudo ufw app list
+sudo ufw allow 'Nginx HTTP'
+sudo ufw status
+
+
+systemctl status nginx
+curl -4 icanhazip.com
+
+http://your_server_ip
+
+
+❗ commands forrefference only
+-------------------------------
+sudo systemctl stop nginx
+sudo systemctl start nginx
+sudo systemctl restart nginx
+sudo systemctl reload nginx
+sudo systemctl disable nginx
+sudo systemctl enable nginx
+
+
+
+
+sudo mkdir -p /var/www/mark-k.com/html
+sudo chown -R $USER:$USER /var/www/mark-k.com/html
+sudo chmod -R 755 /var/www/mark-k.com
+
+
+sudo nano /var/www/mark-k.com/html/index.html
+--------------------------------------------
+<html>
+    <head>
+        <title>Welcome to mark-k.com!</title>
+    </head>
+    <body>
+        <h1>Success!  The mark-k.com server block is working!</h1>
+    </body>
+</html>
+
+
+
+sudo nano /etc/nginx/sites-available/mark-k.com
+----------------------------------------
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/mark-k.com/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name mark-k.com www.mark-k.com;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+
+
+sudo ln -s /etc/nginx/sites-available/mark-k.com /etc/nginx/sites-enabled/
+
+
+sudo nano /etc/nginx/nginx.conf
+--------------------------------
+...
+http {
+    ...
+    server_names_hash_bucket_size 64;
+    ...
+}
+...
+
+--> test nginx
+sudo nginx -t
+
+sudo systemctl restart nginx
+
+
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+########################################################
+
+How To Secure Nginx with Let's Encrypt on Ubuntu 20.04
+
+########################################################
+
+1) create a domain and subdomain starting with www
+I'll be using mark-k.com and www.mark-k.com
+
+
+sudo apt install certbot python3-certbot-nginx
+
+
+--> Enter the file & check that the line exists
+
+sudo nano /etc/nginx/sites-available/mark-k.com
+--------------------------------------------------
+...
+server_name mark-k.com www.mark-k.com;
+...
+
+
+sudo nginx -t
+
+sudo systemctl reload nginx
+
+
+❗ You can skip this section for aws 
+------------------------------------
+sudo ufw status
+sudo ufw allow 'Nginx Full'
+sudo ufw delete allow 'Nginx HTTP'
+
+sudo ufw status
+
+
+
+Obtaining an SSL Certificate
+===============================
+sudo certbot --nginx -d mark-k.com -d www.mark-k.com
+sudo certbot --nginx -d markeybass.com -d www.markeybass.com -d app.cicadamusic.net
+
+
+
+
+
+
+
+
+# If this is your first time running certbot, 
+# you will be prompted to enter an email address and agree to the terms of service. 
+# After doing so, certbot will communicate with the Let’s Encrypt server, 
+# then run a challenge to verify that you control the domain you’re requesting a certificate for.
+# Select your choice then hit ENTER. The configuration will be updated, 
+# and Nginx will reload to pick up the new settings. 
+# certbot will wrap up with a message telling you the process was successful and where your certificates are stored:
+
+Account registered.
+Requesting a certificate for mark-k.com and www.mark-k.com
+
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/mark-k.com/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/mark-k.com/privkey.pem
+This certificate expires on 2023-08-13.
+These files will be updated when the certificate renews.
+Certbot has set up a scheduled task to automatically renew this certificate in the background.
+
+Deploying certificate
+Successfully deployed certificate for mark-k.com to /etc/nginx/sites-enabled/mark-k.com
+Successfully deployed certificate for www.mark-k.com to /etc/nginx/sites-enabled/mark-k.com
+Congratulations! You have successfully enabled HTTPS on https://mark-k.com and https://www.mark-k.com
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+If you like Certbot, please consider supporting our work by:
+ * Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+ * Donating to EFF:                    https://eff.org/donate-le
+
+
+
+
+
+
+
+
+
+
+Verifying Certbot Auto-Renewal
+===============================
+sudo systemctl status certbot.timer
+
+sudo certbot renew --dry-run
+
+
+
+
+
+
+# /etc/nginx/sites-available/mark-k.com Code before GPT change - display the static HTML PAGE
+===============================================================================================
+
+ubuntu@ip-172-31-87-253:~$ cat /etc/nginx/sites-available/mark-k.com
+
+server {
+
+        root /var/www/mark-k.com/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name mark-k.com www.mark-k.com;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/mark-k.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/mark-k.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+}
+server {
+    if ($host = www.mark-k.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = mark-k.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen 80;
+        listen [::]:80;
+
+        server_name mark-k.com www.mark-k.com;
+    return 404; # managed by Certbot
+}
+
+
+# /etc/nginx/sites-available/mark-k.com Code Displaying Django app running on port 8000
+===============================================================================================
+
+server {
+
+        root /var/www/mark-k.com/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name mark-k.com www.mark-k.com;
+
+        location / {
+            proxy_pass http://localhost:8000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+
+        # location / {
+        #         try_files $uri $uri/ =404;
+        # }
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/mark-k.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/mark-k.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+}
+server {
+    if ($host = www.mark-k.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = mark-k.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen 80;
+        listen [::]:80;
+
+        server_name mark-k.com www.mark-k.com;
+    return 404; # managed by Certbot
+
+}
+
+
+
+$ sudo systemctl reload nginx
+
+
+
+
+In case you mess it up and want to reinstall Nginx:
+------------------------------------------------------
+https://askubuntu.com/questions/235347/what-is-the-best-way-to-uninstall-nginx
