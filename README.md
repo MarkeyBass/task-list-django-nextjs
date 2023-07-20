@@ -1,5 +1,5 @@
 
-## Task List App
+### Task List App
 
 This is a TODO-list web application that allows users to create, modify, reorder, and mark tasks as done. 
 The app is built with Python Django as the backend, Next.js as the frontend, and uses SQLite as the database.
@@ -10,11 +10,11 @@ Note that this feature is still under development and will be improved in future
 When creating new task, it won't be added to the change list. The created task will be stored in the db first. 
 
 
-# Run app on windows
+## Run app on windows
 
-## Server Setup
+# Server Setup
 
-1. Before starting, please ensure you have Python 3 and pip installed on your system.
+1. Before starting, please ensure you have Python 3, pip, nodejs and npm installed on your system.
 
 2. From the root of the project, navigate to the "server" directory:
 
@@ -22,16 +22,15 @@ When creating new task, it won't be added to the change list. The created task w
 
 3. Create a new virtual environment:
   
-    ``` python -m venv venv ``` 
+    ```python -m venv venv``` 
 
 4. Activate the virtual environment:
   
-    ``` source venv/Scripts/activate ```
+    ```source venv/Scripts/activate```
 
 5. Install the required dependencies:
   
-    ``` pip install -r requirements.txt ```
-  
+    ```pip install -r requirements.txt```
 
 6. Start backend: 
   
