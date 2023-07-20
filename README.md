@@ -1,5 +1,5 @@
 
-### Task List App
+# Task List App
 
 This is a TODO-list web application that allows users to create, modify, reorder, and mark tasks as done. 
 The app is built with Python Django as the backend, Next.js as the frontend, and uses SQLite as the database.
@@ -12,7 +12,7 @@ When creating new task, it won't be added to the change list. The created task w
 
 ## Run app on windows
 
-# Server Setup
+### Server Setup
 
 1. Before starting, please ensure you have Python 3, pip, nodejs and npm installed on your system.
 
